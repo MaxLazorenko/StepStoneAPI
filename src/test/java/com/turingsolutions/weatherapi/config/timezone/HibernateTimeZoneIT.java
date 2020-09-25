@@ -1,7 +1,6 @@
 package com.turingsolutions.weatherapi.config.timezone;
 
-import com.turingsolutions.weatherapi.WeatherApiApp;
-import com.turingsolutions.weatherapi.config.TestSecurityConfiguration;
+import com.turingsolutions.weatherapi.StepStoneApiApp;
 import com.turingsolutions.weatherapi.repository.timezone.DateTimeWrapper;
 import com.turingsolutions.weatherapi.repository.timezone.DateTimeWrapperRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for the ZoneId Hibernate configuration.
  */
-@SpringBootTest(classes = {WeatherApiApp.class, TestSecurityConfiguration.class})
+@SpringBootTest(classes = StepStoneApiApp.class)
 public class HibernateTimeZoneIT {
 
     @Autowired

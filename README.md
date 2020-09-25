@@ -1,4 +1,4 @@
-# WeatherApi
+# StepStoneAPI
 
 This application was generated using JHipster 6.10.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.10.1](https://www.jhipster.tech/documentation-archive/v6.10.1).
 
@@ -16,7 +16,7 @@ For further instructions on how to develop with JHipster, have a look at [Using 
 
 ### Packaging as jar
 
-To build the final jar and optimize the WeatherApi application for production, run:
+To build the final jar and optimize the StepStoneAPI application for production, run:
 
 ```
 

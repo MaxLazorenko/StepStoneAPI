@@ -37,8 +37,8 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:file:./target/h2db/db/weatherapi;DB_CLOSE_DELAY=-1
-    username: WeatherApi
+    url: jdbc:h2:file:./target/h2db/db/stepstoneapi;DB_CLOSE_DELAY=-1
+    username: StepStoneAPI
     password:
     hikari:
       poolName: Hikari
@@ -81,9 +81,13 @@ jhipster:
     allowed-origins: '*'
     allowed-methods: '*'
     allowed-headers: '*'
-    exposed-headers: 'Authorization,Link,X-Total-Count'
+    exposed-headers: 'Link,X-Total-Count'
     allow-credentials: true
     max-age: 1800
+  security:
+    remember-me:
+      # security key (this key should be unique for your application, and kept secret)
+      key: 5bfeb59f382cbd123c8a4cec0151221d3fe0abc3a9304ab31c1080c226ee0b8609ec933707de5c9686d7563940accb28d5ce
   mail: # specific JHipster mail property, for standard properties see MailProperties
     base-url: http://127.0.0.1:8080
   metrics:

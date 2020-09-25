@@ -59,7 +59,7 @@ management:
 
 spring:
   application:
-    name: WeatherApi
+    name: StepStoneAPI
   profiles:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file
@@ -95,15 +95,22 @@ spring:
     basename: i18n/messages
   main:
     allow-bean-definition-overriding: true
+  security:
+    user:
+      name: admin
+      password: admin
+      roles:
+        - ADMIN
+        - USER
   task:
     execution:
-      thread-name-prefix: weather-api-task-
+      thread-name-prefix: step-stone-api-task-
       pool:
         core-size: 2
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: weather-api-scheduling-
+      thread-name-prefix: step-stone-api-scheduling-
       pool:
         size: 2
   thymeleaf:
@@ -111,16 +118,6 @@ spring:
   output:
     ansi:
       console-available: true
-  security:
-    oauth2:
-      client:
-        provider:
-          oidc:
-            issuer-uri: http://localhost:9080/auth/realms/jhipster
-        registration:
-          oidc:
-            client-id: web_app
-            client-secret: web_app
 
 server:
   servlet:
@@ -141,21 +138,21 @@ info:
 
 jhipster:
   clientApp:
-    name: 'weatherApiApp'
+    name: 'stepStoneApiApp'
   # By default CORS is disabled. Uncomment to enable.
   # cors:
   #     allowed-origins: "*"
   #     allowed-methods: "*"
   #     allowed-headers: "*"
-  #     exposed-headers: "Authorization,Link,X-Total-Count"
+  #     exposed-headers: "Link,X-Total-Count"
   #     allow-credentials: true
   #     max-age: 1800
   mail:
-    from: WeatherApi@localhost
+    from: StepStoneAPI@localhost
   swagger:
     default-include-pattern: /api/.*
-    title: WeatherApi API
-    description: WeatherApi API documentation
+    title: StepStoneAPI API
+    description: StepStoneAPI API documentation
     version: 0.0.1
     terms-of-service-url:
     contact-name:
@@ -163,11 +160,6 @@ jhipster:
     contact-email:
     license: unlicensed
     license-url:
-  security:
-    oauth2:
-      audience:
-        - account
-        - api://default
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

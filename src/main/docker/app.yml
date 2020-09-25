@@ -1,23 +1,16 @@
 version: '2'
 services:
-  weatherapi-app:
-    image: weatherapi
+  stepstoneapi-app:
+    image: stepstoneapi
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,swagger
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
-      - SPRING_DATASOURCE_URL=jdbc:mysql://weatherapi-mysql:3306/weatherapi?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
-      - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUER_URI=http://keycloak:9080/auth/realms/jhipster
-      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_ID=web_app
-      - SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENT_SECRET=web_app
+      - SPRING_DATASOURCE_URL=jdbc:mysql://stepstoneapi-mysql:3306/stepstoneapi?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
     ports:
       - 8080:8080
-  weatherapi-mysql:
+  stepstoneapi-mysql:
     extends:
       file: mysql.yml
-      service: weatherapi-mysql
-  keycloak:
-    extends:
-      file: keycloak.yml
-      service: keycloak
+      service: stepstoneapi-mysql

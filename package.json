@@ -1,7 +1,7 @@
 {
-  "name": "weather-api",
+  "name": "step-stone-api",
   "version": "0.0.0",
-  "description": "Description for WeatherApi",
+  "description": "Description for StepStoneAPI",
   "private": true,
   "license": "UNLICENSED",
   "cacheDirectories": [

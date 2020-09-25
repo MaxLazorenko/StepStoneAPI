@@ -18,10 +18,10 @@ spring:
   # Uncomment the following line to enable tests against production database type rather than H2, using Testcontainers
   #active: testcontainers
   application:
-    name: WeatherApi
+    name: StepStoneAPI
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:mem:WeatherApi;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:StepStoneAPI;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     name:
     username:
     password:
@@ -57,24 +57,17 @@ spring:
     basename: i18n/messages
   task:
     execution:
-      thread-name-prefix: weather-api-task-
+      thread-name-prefix: step-stone-api-task-
       pool:
         core-size: 1
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: weather-api-scheduling-
+      thread-name-prefix: step-stone-api-scheduling-
       pool:
         size: 1
   thymeleaf:
     mode: HTML
-  # Allow SecurityConfiguration to initialize w/o specifying an empty issuer-uri is OK
-  security:
-    oauth2:
-      client:
-        provider:
-          oidc:
-            issuer-uri: http://DO_NOT_CALL:9080/auth/realms/jhipster
 
 server:
   port: 10344
@@ -88,7 +81,7 @@ server:
 
 jhipster:
   clientApp:
-    name: 'weatherApiApp'
+    name: 'stepStoneApiApp'
   logging:
     # To test json console appender
     use-json-format: false
@@ -97,9 +90,10 @@ jhipster:
       host: localhost
       port: 5000
       queue-size: 512
-  mail:
-    from: test@localhost
-    base-url: http://127.0.0.1:8080
+  security:
+    remember-me:
+      # security key (this key should be unique for your application, and kept secret)
+      key: 5bfeb59f382cbd123c8a4cec0151221d3fe0abc3a9304ab31c1080c226ee0b8609ec933707de5c9686d7563940accb28d5ce
   metrics:
     logs: # Reports metrics in the logs
       enabled: true

@@ -1,7 +1,6 @@
 package com.turingsolutions.weatherapi.web.rest.errors;
 
-import com.turingsolutions.weatherapi.WeatherApiApp;
-import com.turingsolutions.weatherapi.config.TestSecurityConfiguration;
+import com.turingsolutions.weatherapi.StepStoneApiApp;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @WithMockUser
 @AutoConfigureMockMvc
-@SpringBootTest(classes = {WeatherApiApp.class, TestSecurityConfiguration.class})
+@SpringBootTest(classes = StepStoneApiApp.class)
 public class ExceptionTranslatorIT {
 
     @Autowired
