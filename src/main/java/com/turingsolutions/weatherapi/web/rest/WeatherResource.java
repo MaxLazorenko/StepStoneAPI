@@ -11,13 +11,14 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/calculate")
+@RequestMapping("/api/weather")
 public class WeatherResource {
     private final WeatherService service;
 
     public WeatherResource(WeatherService service) {
         this.service = service;
     }
+
     @RequestMapping
     public List<StepStoneResult> getWeather(@RequestBody List<StepStoneRequest> requests) throws URISyntaxException {
         return this.service.getWeather(requests);

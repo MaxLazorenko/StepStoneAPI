@@ -170,3 +170,7 @@ jhipster:
 # ===================================================================
 
 # application:
+stepstone:
+  accu-weather: hKHpptfitzDYGTQaVIpjTD8YAwoVOt1D;http://dataservice.accuweather.com
+  weather-bit: 161b00ebc51c4d2ab7ffac3000b2bf66;http://api.weatherbit.io/v2.0/current
+  open-weather: c7aa6f8d844fe9c0790d35021b5f89f1;http://api.openweathermap.org/data/2.5/weather

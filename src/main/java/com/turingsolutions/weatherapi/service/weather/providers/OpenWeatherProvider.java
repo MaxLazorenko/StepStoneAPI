@@ -8,11 +8,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class OpenWeatherProvider extends DefaultWeatherProvider<OpenWeatherResponse> {
-    private final RestTemplate restTemplate;
 
     public OpenWeatherProvider(String apiKey, String url, RestTemplate template) {
-        super(apiKey, url);
-        this.restTemplate = template;
+        super(apiKey, url, template);
     }
 
     @Override
@@ -22,7 +20,7 @@ public class OpenWeatherProvider extends DefaultWeatherProvider<OpenWeatherRespo
                                 .addParameter("appid", getApiKey())
                                 .build();
 
-        OpenWeatherResponse result = this.restTemplate.getForObject(citySearchUrl, OpenWeatherResponse.class);
+        OpenWeatherResponse result = getRestTemplate().getForObject(citySearchUrl, OpenWeatherResponse.class);
 
         if (result == null) {
             return  new OpenWeatherResponse();

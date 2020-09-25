@@ -9,11 +9,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class AccuWeatherProvider extends DefaultWeatherProvider<AccuWeatherResponse> {
-    private final RestTemplate restTemplate;
 
     public AccuWeatherProvider(String apiKey, String url, RestTemplate restTemplate) {
-        super(apiKey, url);
-        this.restTemplate = restTemplate;
+        super(apiKey, url, restTemplate);
     }
 
     @Override
@@ -25,7 +23,7 @@ public class AccuWeatherProvider extends DefaultWeatherProvider<AccuWeatherRespo
                                 .addParameter("q", city)
                                 .build();
 
-        AccuWeatherCityInfo[] cityInfo = this.restTemplate.getForObject(citySearchUrl, AccuWeatherCityInfo[].class);
+        AccuWeatherCityInfo[] cityInfo = getRestTemplate().getForObject(citySearchUrl, AccuWeatherCityInfo[].class);
 
         if (cityInfo != null) {
             for (AccuWeatherCityInfo info: cityInfo) {
@@ -36,7 +34,7 @@ public class AccuWeatherProvider extends DefaultWeatherProvider<AccuWeatherRespo
 
                     URI forecastSearch = new URIBuilder(searchTemperaturePath)
                         .addParameter("apikey", getApiKey()).build();
-                    AccuWeatherResponse response = this.restTemplate.getForObject(forecastSearch, AccuWeatherResponse.class);
+                    AccuWeatherResponse response = getRestTemplate().getForObject(forecastSearch, AccuWeatherResponse.class);
 
                     return response;
                 }

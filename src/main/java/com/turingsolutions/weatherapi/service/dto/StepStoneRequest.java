@@ -1,6 +1,6 @@
 package com.turingsolutions.weatherapi.service.dto;
 
-import com.turingsolutions.weatherapi.service.weather.WeatherProviderType;
+import com.turingsolutions.weatherapi.service.weather.providers.WeatherProviderType;
 
 import java.util.List;
 
