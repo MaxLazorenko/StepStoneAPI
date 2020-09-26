@@ -2,17 +2,16 @@ package com.turingsolutions.weatherapi.service.dto;
 
 import com.turingsolutions.weatherapi.service.weather.providers.WeatherProviderType;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-public class StepStoneRequest {
-    @NotBlank(message = "Provider type can't be blank/or empty")
+public class StepStoneRequestDTO {
+
     @NotNull(message = "StepStone request can't be without type")
     private WeatherProviderType providerType;
-    @NotEmpty(message = "Cities list can't be empty")
     @NotNull(message = "StepStone request can't be without city list")
+    @NotEmpty(message = "Cities list can't be empty")
     private List<String> citiesList;
 
     public List<String> getCitiesList() {
@@ -31,15 +30,15 @@ public class StepStoneRequest {
         this.providerType = providerType;
     }
 
-    public StepStoneRequest(WeatherProviderType providerType, List<String> citiesList) {
+    public StepStoneRequestDTO(WeatherProviderType providerType, List<String> citiesList) {
         this.providerType = providerType;
         this.citiesList = citiesList;
     }
-    public StepStoneRequest withType(WeatherProviderType providerType) {
+    public StepStoneRequestDTO withType(WeatherProviderType providerType) {
         this.providerType = providerType;
         return this;
     }
-    public StepStoneRequest() {
+    public StepStoneRequestDTO() {
         this(null ,null);
     }
 }

@@ -1,8 +1,8 @@
 package com.turingsolutions.weatherapi.service.weather;
 
 import com.turingsolutions.weatherapi.config.stepstone.StepStoneConfiguration;
-import com.turingsolutions.weatherapi.service.dto.StepStoneRequest;
-import com.turingsolutions.weatherapi.service.dto.StepStoneResult;
+import com.turingsolutions.weatherapi.service.dto.StepStoneRequestDTO;
+import com.turingsolutions.weatherapi.service.dto.StepStoneResultDTO;
 import com.turingsolutions.weatherapi.service.weather.interfaces.WeatherProvider;
 import com.turingsolutions.weatherapi.service.weather.interfaces.WeatherService;
 import com.turingsolutions.weatherapi.service.weather.providers.WeatherProviderType;
@@ -25,34 +25,34 @@ public class WeatherServiceImpl implements WeatherService {
     }
 
     @Override
-    public List<StepStoneResult> getWeather(List<StepStoneRequest> request) throws URISyntaxException {
-        List<StepStoneResult> result = new ArrayList<>();
+    public List<StepStoneResultDTO> getWeather(List<StepStoneRequestDTO> request) throws URISyntaxException {
+        List<StepStoneResultDTO> result = new ArrayList<>();
 
         if (request == null) {
             return  Collections.emptyList();
         }
-        for (StepStoneRequest req: request) {
+        for (StepStoneRequestDTO req: request) {
             switch (req.getProviderType()) {
                 case ACCU_WEATHER:
-                    result.add(new StepStoneResult("accuWeather", getAccuWeatherResult(req)));
+                    result.add(new StepStoneResultDTO("accuWeather", getAccuWeatherResult(req)));
                     break;
                 case OPEN_WEATHER:
-                    result.add(new StepStoneResult("openWeather", getOpenWeatherResult(req)));
+                    result.add(new StepStoneResultDTO("openWeather", getOpenWeatherResult(req)));
                     break;
                 case WEATHER_BIT:
-                    result.add(new StepStoneResult("bitWeather", getBitWeatherResult(req)));
+                    result.add(new StepStoneResultDTO("bitWeather", getBitWeatherResult(req)));
                     break;
                 case ALL:
-                    result.add(new StepStoneResult("accuWeather", getAccuWeatherResult(req.withType(WeatherProviderType.ACCU_WEATHER))));
-                    result.add(new StepStoneResult("bitWeather", getBitWeatherResult(req.withType(WeatherProviderType.WEATHER_BIT))));
-                    result.add(new StepStoneResult("openWeather", getOpenWeatherResult(req.withType(WeatherProviderType.OPEN_WEATHER))));
+                    result.add(new StepStoneResultDTO("accuWeather", getAccuWeatherResult(req.withType(WeatherProviderType.ACCU_WEATHER))));
+                    result.add(new StepStoneResultDTO("bitWeather", getBitWeatherResult(req.withType(WeatherProviderType.WEATHER_BIT))));
+                    result.add(new StepStoneResultDTO("openWeather", getOpenWeatherResult(req.withType(WeatherProviderType.OPEN_WEATHER))));
                     break;
             }
         }
 
         return result;
     }
-    private Map<String, String> getAccuWeatherResult(StepStoneRequest req) throws URISyntaxException {
+    private Map<String, String> getAccuWeatherResult(StepStoneRequestDTO req) throws URISyntaxException {
         Map<String , String> accuWeatherResult = new HashMap<>();
 
         WeatherProvider<AccuWeatherResponse> weatherProvider = WeatherProviderFactory.createProviderByType(req.getProviderType(), configuration);
@@ -71,7 +71,7 @@ public class WeatherServiceImpl implements WeatherService {
 
         return accuWeatherResult;
     }
-    private Map<String, String> getOpenWeatherResult(StepStoneRequest req) throws URISyntaxException {
+    private Map<String, String> getOpenWeatherResult(StepStoneRequestDTO req) throws URISyntaxException {
         Map<String , String> openWeatherResult = new HashMap<>();
 
         WeatherProvider<OpenWeatherResponse> weatherProvider = WeatherProviderFactory.createProviderByType(req.getProviderType(), configuration);
@@ -85,7 +85,7 @@ public class WeatherServiceImpl implements WeatherService {
         }
         return openWeatherResult;
     }
-    private Map<String, String> getBitWeatherResult(StepStoneRequest req) throws URISyntaxException {
+    private Map<String, String> getBitWeatherResult(StepStoneRequestDTO req) throws URISyntaxException {
         Map<String , String> bitWeatherResult = new HashMap<>();
 
         WeatherProvider<BitWeatherResponse> weatherProvider = WeatherProviderFactory.createProviderByType(req.getProviderType(), configuration);

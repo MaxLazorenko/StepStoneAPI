@@ -2,7 +2,7 @@ package com.turingsolutions.weatherapi.service.dto;
 
 import java.util.Map;
 
-public class StepStoneResult {
+public class StepStoneResultDTO {
     private String providerName;
     private Map<String, String> providerResult;
 
@@ -18,11 +18,11 @@ public class StepStoneResult {
         return providerName;
     }
 
-    public StepStoneResult(String providerName, Map<String, String> providerResult) {
+    public StepStoneResultDTO(String providerName, Map<String, String> providerResult) {
         this.providerName = providerName;
         this.providerResult = providerResult;
     }
-    public StepStoneResult() {
+    public StepStoneResultDTO() {
         this(null, null);
     }
 }
