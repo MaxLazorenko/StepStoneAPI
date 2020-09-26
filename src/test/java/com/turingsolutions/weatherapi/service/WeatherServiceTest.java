@@ -42,7 +42,6 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @ExtendWith(MockitoExtension.class)
 @RestClientTest(AccuWeatherProvider.class)
 public class WeatherServiceTest {
-    @Mock
     private WeatherServiceImpl service;
     private ObjectMapper objectMapper;
     private MockRestServiceServer mockRestServiceServer;
@@ -83,13 +82,12 @@ public class WeatherServiceTest {
         providerResult.put("Gdansk", "30");
         StepStoneResultDTO result = new StepStoneResultDTO("OPEN_WEATHER", providerResult);
         resultList.add(result);
-        Mockito.lenient().when(service.getWeather(requestList)).thenReturn(resultList);
-        List<StepStoneResultDTO> resultStepStone = service.getWeather(Collections.emptyList());
+        List<StepStoneResultDTO> resultStepStone = service.getWeather(requestList);
         Assertions.assertNotNull(resultStepStone);
 
         for (StepStoneResultDTO dto: resultStepStone) {
             Assertions.assertEquals("openWeather", dto.getProviderName());
-            Assertions.assertEquals("30", dto.getProviderResult().get("Gdansk"));
+            Assertions.assertEquals("30.0", dto.getProviderResult().get("Gdansk"));
         }
 
 
