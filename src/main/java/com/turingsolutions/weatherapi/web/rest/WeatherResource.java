@@ -3,10 +3,9 @@ package com.turingsolutions.weatherapi.web.rest;
 import com.turingsolutions.weatherapi.service.dto.StepStoneRequest;
 import com.turingsolutions.weatherapi.service.dto.StepStoneResult;
 import com.turingsolutions.weatherapi.service.weather.interfaces.WeatherService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -19,8 +18,8 @@ public class WeatherResource {
         this.service = service;
     }
 
-    @RequestMapping
-    public List<StepStoneResult> getWeather(@RequestBody List<StepStoneRequest> requests) throws URISyntaxException {
+    @GetMapping("/")
+    public List<StepStoneResult> getWeather(@Valid @RequestBody List<StepStoneRequest> requests) throws URISyntaxException {
         return this.service.getWeather(requests);
     }
 }

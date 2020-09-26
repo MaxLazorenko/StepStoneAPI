@@ -1,6 +1,5 @@
 package com.turingsolutions.weatherapi.service.weather.providers;
 
-import com.turingsolutions.weatherapi.service.weather.providers.DefaultWeatherProvider;
 import com.turingsolutions.weatherapi.service.weather.providers.response.bitWeather.BitWeatherResponse;
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.web.client.RestTemplate;

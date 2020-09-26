@@ -19,36 +19,9 @@ spring:
   #active: testcontainers
   application:
     name: StepStoneAPI
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:h2:mem:StepStoneAPI;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    name:
-    username:
-    password:
-    hikari:
-      auto-commit: false
   jackson:
     serialization:
       write-durations-as-timestamps: false
-  jpa:
-    database-platform: io.github.jhipster.domain.util.FixedH2Dialect
-    open-in-view: false
-    show-sql: false
-    hibernate:
-      ddl-auto: none
-      naming:
-        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
-        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
-    properties:
-      hibernate.id.new_generator_mappings: true
-      hibernate.connection.provider_disables_autocommit: true
-      hibernate.cache.use_second_level_cache: false
-      hibernate.cache.use_query_cache: false
-      hibernate.generate_statistics: false
-      hibernate.hbm2ddl.auto: validate
-      hibernate.jdbc.time_zone: UTC
-  liquibase:
-    contexts: test
   mail:
     host: localhost
   main:
@@ -90,10 +63,6 @@ jhipster:
       host: localhost
       port: 5000
       queue-size: 512
-  security:
-    remember-me:
-      # security key (this key should be unique for your application, and kept secret)
-      key: 5bfeb59f382cbd123c8a4cec0151221d3fe0abc3a9304ab31c1080c226ee0b8609ec933707de5c9686d7563940accb28d5ce
   metrics:
     logs: # Reports metrics in the logs
       enabled: true
