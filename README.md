@@ -10,13 +10,12 @@ To start your application in the dev profile, run:
 ./mvnw
 ```
 
-For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
 
 ## Building for production
 
 ### Packaging as jar
 
-To build the final jar and optimize the Decerto application for production, run:
+To build the final jar and optimize the application for production, run:
 
 ```
 
