@@ -68,11 +68,6 @@ public class WeatherServiceTest {
         citiesList.add("Gdansk");
         StepStoneRequestDTO requestDTO = new StepStoneRequestDTO(WeatherProviderType.OPEN_WEATHER, citiesList);
         requestList.add(requestDTO);
-        List<StepStoneResultDTO> resultList = new ArrayList<>();
-        HashMap<String, String> providerResult = new HashMap<>();
-        providerResult.put("Gdansk", "30");
-        StepStoneResultDTO result = new StepStoneResultDTO("OPEN_WEATHER", providerResult);
-        resultList.add(result);
         List<StepStoneResultDTO> resultStepStone = service.getWeather(requestList);
         Assertions.assertNotNull(resultStepStone);
 
