@@ -7,24 +7,23 @@ import org.springframework.web.client.RestTemplate;
 
 public class WeatherProviderFactory {
 
-    public static <T> WeatherProvider<T> createProviderByType(WeatherProviderType type, StepStoneConfiguration configuration) {
-        DefaultWeatherProvider provider = null;
-        switch (type) {
-            case OPEN_WEATHER:
-                provider = new OpenWeatherProvider(configuration.getOpenWeatherKey(),
-                                                   configuration.getOpenWeatherUrl(),
-                                                   new RestTemplate());
-                break;
-            case WEATHER_BIT:
-                provider = new BitWeatherProvider(configuration.getBitWeatherKey(),
-                                                  configuration.getBitWeatherUrl(),
-                                                  new RestTemplate());
-                break;
-            case ACCU_WEATHER:
-                provider = new AccuWeatherProvider(configuration.getAccuWeatherKey(),
-                                                   configuration.getAccuWeatherUrl(),
-                                                   new RestTemplate());
+    public static <T> WeatherProvider<T> createProviderByType(WeatherProviderType type, StepStoneConfiguration configuration, RestTemplate template) {
+        if (type == WeatherProviderType.OPEN_WEATHER) {
+            return (WeatherProvider<T>) new OpenWeatherProvider(configuration.getOpenWeatherKey(),
+                                        configuration.getOpenWeatherUrl(),
+                                        template);
         }
-        return provider;
+        if (type == WeatherProviderType.ACCU_WEATHER) {
+            return (WeatherProvider<T>) new AccuWeatherProvider(configuration.getAccuWeatherKey(),
+                                        configuration.getAccuWeatherUrl(),
+                                        template);
+        }
+        if (type == WeatherProviderType.WEATHER_BIT) {
+            return (WeatherProvider<T>) new BitWeatherProvider(configuration.getBitWeatherKey(),
+                                        configuration.getBitWeatherUrl(),
+                                        template);
+        }
+
+        return null;
     }
 }

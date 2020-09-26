@@ -11,17 +11,25 @@ import com.turingsolutions.weatherapi.service.weather.providers.response.accuWea
 import com.turingsolutions.weatherapi.service.weather.providers.response.bitWeather.BitWeatherData;
 import com.turingsolutions.weatherapi.service.weather.providers.response.bitWeather.BitWeatherResponse;
 import com.turingsolutions.weatherapi.service.weather.providers.response.openWeather.OpenWeatherResponse;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.URISyntaxException;
 import java.util.*;
 
 @Service
 public class WeatherServiceImpl implements WeatherService {
-    private final StepStoneConfiguration configuration;
+    private StepStoneConfiguration configuration;
+    private RestTemplate template;
 
-    public WeatherServiceImpl(StepStoneConfiguration configuration) {
+    public WeatherServiceImpl(StepStoneConfiguration configuration, RestTemplateBuilder restTemplateBuilder) {
         this.configuration = configuration;
+        this.template = restTemplateBuilder.build();
+    }
+
+    public RestTemplate getTemplate() {
+        return template;
     }
 
     @Override
@@ -55,7 +63,8 @@ public class WeatherServiceImpl implements WeatherService {
     private Map<String, String> getAccuWeatherResult(StepStoneRequestDTO req) throws URISyntaxException {
         Map<String , String> accuWeatherResult = new HashMap<>();
 
-        WeatherProvider<AccuWeatherResponse> weatherProvider = WeatherProviderFactory.createProviderByType(req.getProviderType(), configuration);
+        WeatherProvider<AccuWeatherResponse> weatherProvider = WeatherProviderFactory.createProviderByType(req.getProviderType(),
+                                                                                                           configuration, template);
 
         for (String city: req.getCitiesList()) {
             AccuWeatherResponse weatherRes = weatherProvider.getWeatherByCity(city);
@@ -71,10 +80,10 @@ public class WeatherServiceImpl implements WeatherService {
 
         return accuWeatherResult;
     }
-    private Map<String, String> getOpenWeatherResult(StepStoneRequestDTO req) throws URISyntaxException {
+    public Map<String, String> getOpenWeatherResult(StepStoneRequestDTO req) throws URISyntaxException {
         Map<String , String> openWeatherResult = new HashMap<>();
 
-        WeatherProvider<OpenWeatherResponse> weatherProvider = WeatherProviderFactory.createProviderByType(req.getProviderType(), configuration);
+        WeatherProvider<OpenWeatherResponse> weatherProvider = WeatherProviderFactory.createProviderByType(req.getProviderType(), configuration, template);
 
         for (String city: req.getCitiesList()) {
             OpenWeatherResponse weatherRes = weatherProvider.getWeatherByCity(city);
@@ -88,7 +97,7 @@ public class WeatherServiceImpl implements WeatherService {
     private Map<String, String> getBitWeatherResult(StepStoneRequestDTO req) throws URISyntaxException {
         Map<String , String> bitWeatherResult = new HashMap<>();
 
-        WeatherProvider<BitWeatherResponse> weatherProvider = WeatherProviderFactory.createProviderByType(req.getProviderType(), configuration);
+        WeatherProvider<BitWeatherResponse> weatherProvider = WeatherProviderFactory.createProviderByType(req.getProviderType(), configuration, template);
 
         for (String city: req.getCitiesList()) {
             BitWeatherResponse weatherRes = weatherProvider.getWeatherByCity(city);
