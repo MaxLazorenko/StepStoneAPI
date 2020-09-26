@@ -1,6 +1,6 @@
-# StepStoneAPI
+# StepStone API Task
 
-This application was generated using JHipster 6.10.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.10.1](https://www.jhipster.tech/documentation-archive/v6.10.1).
+Application building by JHipster, uses JDK 11.
 
 ## Development
 
@@ -16,7 +16,7 @@ For further instructions on how to develop with JHipster, have a look at [Using 
 
 ### Packaging as jar
 
-To build the final jar and optimize the StepStoneAPI application for production, run:
+To build the final jar and optimize the Decerto application for production, run:
 
 ```
 
@@ -34,52 +34,78 @@ java -jar target/*.jar
 
 ```
 
-Refer to [Using JHipster in production][] for more details.
+## How to use app
 
-### Packaging as war
+To test application, use postman: [https://www.postman.com/downloads/](https://www.postman.com/downloads/)
 
-To package your application as a war in order to deploy it to an application server, run:
-
-```
-
-./mvnw -Pprod,war clean verify
-
+Next,
+Send POST( http://localhost:8080/api/weather/) request with next body:
 
 ```
+[
+{
+    "providerType": "WEATHER_BIT",
+    "citiesList": ["Gdansk", "Warsaw"]
+},
+{
+    "providerType": "ACCU_WEATHER",
+    "citiesList": ["Gdansk", "Warsaw"]
 
-## Testing
+},
+{
+    "providerType": "OPEN_WEATHER",
+    "citiesList": ["Gdansk", "Warsaw"]
 
-To launch your application's tests, run:
-
-```
-./mvnw verify
-```
-
-For more information, refer to the [Running tests page][].
-
-### Code quality
-
-Sonar is used to analyse code quality. You can start a local Sonar server (accessible on http://localhost:9001) with:
-
-```
-docker-compose -f src/main/docker/sonar.yml up -d
-```
-
-You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the maven plugin.
-
-Then, run a Sonar analysis:
-
-```
-./mvnw -Pprod clean verify sonar:sonar
+}
+]
 ```
 
-If you need to re-run the Sonar phase, please be sure to specify at least the `initialize` phase since Sonar properties are loaded from the sonar-project.properties file.
+```
+In this context we have next types:
+- OPEN_WEATHER - Open Weather
+- ACCU_WEATHER - Accu Weather
+- WEATHER_BIT - Weather Bit
+- ALL - if you want to see result from all providers
+```
+
+Then, we got response :
 
 ```
-./mvnw initialize sonar:sonar
+[
+    {
+        "providerName": "bitWeather",
+        "providerResult": {
+            "Warsaw": "21.7",
+            "Gdansk": "18.1"
+        }
+    },
+    {
+        "providerName": "accuWeather",
+        "providerResult": {
+            "Warsaw": "71F",
+            "Gdansk": "71F"
+        }
+    },
+    {
+        "providerName": "openWeather",
+        "providerResult": {
+            "Warsaw": "294.19",
+            "Gdansk": "294.04"
+        }
+    }
+]
 ```
 
-For more information, refer to the [Code quality page][].
+NOTE:
+Please, if you have any problems with existing Api keys (every weather source generate API_KEY)
+Change api keys in `src/main/resources/config/application.yml`
+
+```
+stepstone:
+  accu-weather: KEY;URL
+  weather-bit: KEY;URL
+  open-weather: KEY;URL
+```
 
 ## Using Docker to simplify development (optional)
 
@@ -111,16 +137,3 @@ docker-compose -f src/main/docker/app.yml up -d
 ```
 
 For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
-
-## Continuous Integration (optional)
-
-To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
-
-[jhipster homepage and latest documentation]: https://www.jhipster.tech
-[jhipster 6.10.1 archive]: https://www.jhipster.tech/documentation-archive/v6.10.1
-[using jhipster in development]: https://www.jhipster.tech/documentation-archive/v6.10.1/development/
-[using docker and docker-compose]: https://www.jhipster.tech/documentation-archive/v6.10.1/docker-compose
-[using jhipster in production]: https://www.jhipster.tech/documentation-archive/v6.10.1/production/
-[running tests page]: https://www.jhipster.tech/documentation-archive/v6.10.1/running-tests/
-[code quality page]: https://www.jhipster.tech/documentation-archive/v6.10.1/code-quality/
-[setting up continuous integration]: https://www.jhipster.tech/documentation-archive/v6.10.1/setting-up-ci/
